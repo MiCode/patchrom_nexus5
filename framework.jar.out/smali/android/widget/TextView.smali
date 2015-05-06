@@ -19867,15 +19867,19 @@
     .param p3, "previouslyFocusedRect"    # Landroid/graphics/Rect;
 
     .prologue
+    .line 7620
     iget-boolean v0, p0, Landroid/widget/TextView;->mTemporaryDetach:Z
 
     if-eqz v0, :cond_0
 
+    .line 7622
     invoke-super {p0, p1, p2, p3}, Landroid/view/View;->onFocusChanged(ZILandroid/graphics/Rect;)V
 
+    .line 7642
     :goto_0
     return-void
 
+    .line 7626
     :cond_0
     iget-object v0, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
@@ -22837,11 +22841,13 @@
 
     invoke-virtual {v7, p1}, Landroid/widget/Editor;->onTouchEvent(Landroid/view/MotionEvent;)V
 
+    .line 7693
     :cond_0
     invoke-super {p0, p1}, Landroid/view/View;->onTouchEvent(Landroid/view/MotionEvent;)Z
 
     move-result v4
 
+    .line 7700
     .local v4, "superResult":Z
     iget-object v7, p0, Landroid/widget/TextView;->mEditor:Landroid/widget/Editor;
 
