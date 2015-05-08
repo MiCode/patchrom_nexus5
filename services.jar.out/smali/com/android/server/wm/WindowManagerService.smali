@@ -19888,7 +19888,7 @@
 
     if-gtz v0, :cond_1
 
-    if-gtz v3, :cond_2
+    if-lez v3, :cond_2
 
     :cond_1
     move v5, v6
