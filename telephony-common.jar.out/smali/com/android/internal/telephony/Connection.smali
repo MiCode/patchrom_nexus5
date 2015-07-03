@@ -21,6 +21,8 @@
 
 .field protected mCnapNamePresentation:I
 
+.field private mFirewallCode:I
+
 .field mUserData:Ljava/lang/Object;
 
 
@@ -41,15 +43,16 @@
     .locals 1
 
     .prologue
-    .line 25
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 29
     sget v0, Lcom/android/internal/telephony/PhoneConstants;->PRESENTATION_ALLOWED:I
 
     iput v0, p0, Lcom/android/internal/telephony/Connection;->mCnapNamePresentation:I
 
-    .line 233
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/android/internal/telephony/Connection;->mFirewallCode:I
+
     return-void
 .end method
 
@@ -110,6 +113,15 @@
 .end method
 
 .method public abstract getDurationMillis()J
+.end method
+
+.method public getFirewallCode()I
+    .locals 1
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/telephony/Connection;->mFirewallCode:I
+
+    return v0
 .end method
 
 .method public abstract getHoldDurationMillis()J
@@ -199,6 +211,15 @@
     return v0
 .end method
 
+.method public isForwarded()Z
+    .locals 1
+
+    .prologue
+    const/4 v0, 0x0
+
+    return v0
+.end method
+
 .method public abstract isIncoming()Z
 .end method
 
@@ -230,6 +251,16 @@
             Lcom/android/internal/telephony/CallStateException;
         }
     .end annotation
+.end method
+
+.method public setFirewallCode(I)V
+    .locals 0
+    .param p1, "firewallCode"    # I
+
+    .prologue
+    iput p1, p0, Lcom/android/internal/telephony/Connection;->mFirewallCode:I
+
+    return-void
 .end method
 
 .method public setUserData(Ljava/lang/Object;)V
