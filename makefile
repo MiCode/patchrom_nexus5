@@ -43,4 +43,4 @@ local-after-zip:=
 include $(PORT_BUILD)/porting.mk
 
 adjust_apps_location:
-	mv $(ZIP_DIR)/system/app/QuickSearchBox.apk $(ZIP_DIR)/system/priv-app/QuickSearchBox.apk
+	-mv $(ZIP_DIR)/system/app/QuickSearchBox.apk $(ZIP_DIR)/system/priv-app/QuickSearchBox.apk

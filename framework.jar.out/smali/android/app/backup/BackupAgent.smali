@@ -1275,7 +1275,11 @@
 
     invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 489
+    if-nez p1, :cond_miui_00
+
+    return-void
+
+    :cond_miui_00
     const-string v2, "f"
 
     move-object/from16 v0, p5
