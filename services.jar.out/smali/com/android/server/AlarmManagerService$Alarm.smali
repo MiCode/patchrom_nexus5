@@ -9,7 +9,7 @@
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
-    accessFlags = 0xa
+    accessFlags = 0x8                         # change 0xa -> 0x8
     name = "Alarm"
 .end annotation
 
@@ -21,10 +21,12 @@
 
 .field public operation:Landroid/app/PendingIntent;
 
+.field public pid:I                            # add
 .field public repeatInterval:J
 
 .field public type:I
 
+.field public uid:I                            # add
 .field public when:J
 
 .field public whenElapsed:J
@@ -36,7 +38,7 @@
 
 # direct methods
 .method public constructor <init>(IJJJJJLandroid/app/PendingIntent;Landroid/os/WorkSource;)V
-    .locals 0
+    .locals 1                             # change 0->1
     .param p1, "_type"    # I
     .param p2, "_when"    # J
     .param p4, "_whenElapsed"    # J
@@ -47,34 +49,38 @@
     .param p13, "_ws"    # Landroid/os/WorkSource;
 
     .prologue
-    .line 1093
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
-    .line 1094
     iput p1, p0, Lcom/android/server/AlarmManagerService$Alarm;->type:I
 
-    .line 1095
     iput-wide p2, p0, Lcom/android/server/AlarmManagerService$Alarm;->when:J
 
-    .line 1096
     iput-wide p4, p0, Lcom/android/server/AlarmManagerService$Alarm;->whenElapsed:J
 
-    .line 1097
     iput-wide p6, p0, Lcom/android/server/AlarmManagerService$Alarm;->windowLength:J
 
-    .line 1098
     iput-wide p8, p0, Lcom/android/server/AlarmManagerService$Alarm;->maxWhen:J
 
-    .line 1099
     iput-wide p10, p0, Lcom/android/server/AlarmManagerService$Alarm;->repeatInterval:J
 
-    .line 1100
     iput-object p12, p0, Lcom/android/server/AlarmManagerService$Alarm;->operation:Landroid/app/PendingIntent;
 
-    .line 1101
     iput-object p13, p0, Lcom/android/server/AlarmManagerService$Alarm;->workSource:Landroid/os/WorkSource;
 
-    .line 1102
+    #add
+    invoke-static {}, Landroid/os/Binder;->getCallingUid()I
+
+    move-result v0
+
+    iput v0, p0, Lcom/android/server/AlarmManagerService$Alarm;->uid:I
+
+    invoke-static {}, Landroid/os/Binder;->getCallingPid()I
+
+    move-result v0
+
+    iput v0, p0, Lcom/android/server/AlarmManagerService$Alarm;->pid:I
+    #add
+
     return-void
 .end method
 
