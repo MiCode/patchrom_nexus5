@@ -486,27 +486,34 @@
     .locals 5
 
     .prologue
-    .line 103
+    iget-object v3, p0, Landroid/widget/Toast;->mContext:Landroid/content/Context;
+
+    invoke-static {p0, v3}, Landroid/widget/ToastInjector;->interceptBackgroundToast(Landroid/widget/Toast;Landroid/content/Context;)Z
+
+    move-result v3
+
+    if-nez v3, :cond_miui
+
+    return-void
+
+    :cond_miui
     iget-object v3, p0, Landroid/widget/Toast;->mNextView:Landroid/view/View;
 
     if-nez v3, :cond_0
 
-    .line 104
     new-instance v3, Ljava/lang/RuntimeException;
 
-    const-string/jumbo v4, "setView must have been called"
+    const-string v4, "setView must have been called"
 
     invoke-direct {v3, v4}, Ljava/lang/RuntimeException;-><init>(Ljava/lang/String;)V
 
     throw v3
 
-    .line 107
     :cond_0
     invoke-static {}, Landroid/widget/Toast;->getService()Landroid/app/INotificationManager;
 
     move-result-object v1
 
-    .line 108
     .local v1, "service":Landroid/app/INotificationManager;
     iget-object v3, p0, Landroid/widget/Toast;->mContext:Landroid/content/Context;
 

@@ -24,7 +24,7 @@
 
 .field private static final MAX_RETRIES_ON_ASSOCIATION_REJECT:I = 0x10
 
-.field private static final MAX_RETRIES_ON_AUTHENTICATION_FAILURE:I = 0x2
+.field private static final MAX_RETRIES_ON_AUTHENTICATION_FAILURE:I = 0x1
 
 .field private static final TAG:Ljava/lang/String; = "SupplicantStateTracker"
 
@@ -454,33 +454,38 @@
 .end method
 
 .method private handleNetworkConnectionFailure(II)V
-    .locals 1
+    .locals 2
     .param p1, "netId"    # I
     .param p2, "disableReason"    # I
 
     .prologue
-    .line 98
     iget-boolean v0, p0, Landroid/net/wifi/SupplicantStateTracker;->mNetworksDisabledDuringConnect:Z
 
     if-eqz v0, :cond_0
 
-    .line 99
     iget-object v0, p0, Landroid/net/wifi/SupplicantStateTracker;->mWifiConfigStore:Landroid/net/wifi/WifiConfigStore;
 
     invoke-virtual {v0}, Landroid/net/wifi/WifiConfigStore;->enableAllNetworks()V
 
-    .line 100
     const/4 v0, 0x0
 
     iput-boolean v0, p0, Landroid/net/wifi/SupplicantStateTracker;->mNetworksDisabledDuringConnect:Z
 
-    .line 103
     :cond_0
     iget-object v0, p0, Landroid/net/wifi/SupplicantStateTracker;->mWifiConfigStore:Landroid/net/wifi/WifiConfigStore;
 
     invoke-virtual {v0, p1, p2}, Landroid/net/wifi/WifiConfigStore;->disableNetwork(II)Z
 
-    .line 104
+    iget-object v0, p0, Landroid/net/wifi/SupplicantStateTracker;->mContext:Landroid/content/Context;
+
+    iget-object v1, p0, Landroid/net/wifi/SupplicantStateTracker;->mWifiConfigStore:Landroid/net/wifi/WifiConfigStore;
+
+    invoke-virtual {v1}, Landroid/net/wifi/WifiConfigStore;->getConfiguredNetworks()Ljava/util/List;
+
+    move-result-object v1
+
+    invoke-static {v0, v1, p1}, Landroid/net/wifi/SupplicantStateTrackerInjector;->handleNetworkConnectionFailure(Landroid/content/Context;Ljava/util/List;I)V
+
     return-void
 .end method
 
