@@ -15,6 +15,8 @@
 
 
 # static fields
+.field public static final BASE_OS:Ljava/lang/String;
+
 .field public static final CODENAME:Ljava/lang/String;
 
 .field public static final INCREMENTAL:Ljava/lang/String;
@@ -29,6 +31,8 @@
 .end field
 
 .field public static final SDK_INT:I
+
+.field public static final SECURITY_PATCH:Ljava/lang/String;
 
 
 # direct methods
@@ -57,6 +61,26 @@
     move-result-object v1
 
     sput-object v1, Landroid/os/Build$VERSION;->RELEASE:Ljava/lang/String;
+
+    const-string v1, "ro.build.version.base_os"
+
+    const-string v2, ""
+
+    invoke-static {v1, v2}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    sput-object v1, Landroid/os/Build$VERSION;->BASE_OS:Ljava/lang/String;
+
+    const-string v1, "ro.build.version.security_patch"
+
+    const-string v2, ""
+
+    invoke-static {v1, v2}, Landroid/os/SystemProperties;->get(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    sput-object v1, Landroid/os/Build$VERSION;->SECURITY_PATCH:Ljava/lang/String;
 
     .line 99
     const-string/jumbo v1, "ro.build.version.sdk"
