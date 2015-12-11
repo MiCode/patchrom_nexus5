@@ -21,6 +21,8 @@
 # instance fields
 .field private mDataCodingScheme:I
 
+.field private mEncodingType:I
+
 .field private mIsStatusReportMessage:Z
 
 .field private mMti:I
@@ -43,16 +45,14 @@
     .prologue
     const/4 v0, 0x0
 
-    .line 48
     invoke-direct {p0}, Lcom/android/internal/telephony/SmsMessageBase;-><init>()V
 
-    .line 69
     iput-boolean v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mReplyPathPresent:Z
 
-    .line 85
     iput-boolean v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mIsStatusReportMessage:Z
 
-    .line 493
+    iput v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mEncodingType:I
+
     return-void
 .end method
 
@@ -1884,35 +1884,30 @@
 
     iput-object v5, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mUserData:[B
 
-    .line 1160
     invoke-virtual {p1}, Lcom/android/internal/telephony/gsm/SmsMessage$PduParser;->getUserDataHeader()Lcom/android/internal/telephony/SmsHeader;
 
     move-result-object v5
 
     iput-object v5, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mUserDataHeader:Lcom/android/internal/telephony/SmsHeader;
 
-    .line 1162
+    iput v2, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mEncodingType:I
+
     packed-switch v2, :pswitch_data_0
 
-    .line 1185
     :goto_4
     iget-object v5, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mMessageBody:Ljava/lang/String;
 
     if-eqz v5, :cond_0
 
-    .line 1186
     invoke-virtual {p0}, Lcom/android/internal/telephony/gsm/SmsMessage;->parseMessageBody()V
 
-    .line 1189
     :cond_0
     if-nez v3, :cond_12
 
-    .line 1190
     sget-object v5, Lcom/android/internal/telephony/SmsConstants$MessageClass;->UNKNOWN:Lcom/android/internal/telephony/SmsConstants$MessageClass;
 
     iput-object v5, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->messageClass:Lcom/android/internal/telephony/SmsConstants$MessageClass;
 
-    .line 1207
     :goto_5
     return-void
 
@@ -2378,6 +2373,15 @@
     .prologue
     .line 796
     iget v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mDataCodingScheme:I
+
+    return v0
+.end method
+
+.method public getEncodingType()I
+    .locals 1
+
+    .prologue
+    iget v0, p0, Lcom/android/internal/telephony/gsm/SmsMessage;->mEncodingType:I
 
     return v0
 .end method

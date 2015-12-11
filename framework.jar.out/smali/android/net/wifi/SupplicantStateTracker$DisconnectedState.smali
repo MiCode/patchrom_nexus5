@@ -64,9 +64,24 @@
 
     const/4 v3, 0x2
 
-    if-lt v2, v3, :cond_1
+    if-ge v2, v3, :cond_miui_0
 
-    .line 235
+    iget v2, v1, Landroid/net/wifi/StateChangeResult;->networkId:I
+
+    iget-object v3, p0, Landroid/net/wifi/SupplicantStateTracker$DisconnectedState;->this$0:Landroid/net/wifi/SupplicantStateTracker;
+
+    # getter for: Landroid/net/wifi/SupplicantStateTracker;->mAuthenticationFailuresCount:I
+    invoke-static {v3}, Landroid/net/wifi/SupplicantStateTracker;->access_mAuthenticationFailuresCount(Landroid/net/wifi/SupplicantStateTracker;)I
+
+    move-result v3
+
+    invoke-static {v2, v3}, Landroid/net/wifi/SupplicantStateTrackerInjector;->isConformAuthFailure(II)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1
+
+    :cond_miui_0
     const-string v2, "SupplicantStateTracker"
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -91,7 +106,6 @@
 
     invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
-    .line 237
     iget-object v2, p0, Landroid/net/wifi/SupplicantStateTracker$DisconnectedState;->this$0:Landroid/net/wifi/SupplicantStateTracker;
 
     iget v3, v1, Landroid/net/wifi/StateChangeResult;->networkId:I
@@ -101,18 +115,15 @@
     # invokes: Landroid/net/wifi/SupplicantStateTracker;->handleNetworkConnectionFailure(II)V
     invoke-static {v2, v3, v4}, Landroid/net/wifi/SupplicantStateTracker;->access$900(Landroid/net/wifi/SupplicantStateTracker;II)V
 
-    .line 239
     iget-object v2, p0, Landroid/net/wifi/SupplicantStateTracker$DisconnectedState;->this$0:Landroid/net/wifi/SupplicantStateTracker;
 
     # setter for: Landroid/net/wifi/SupplicantStateTracker;->mAuthenticationFailuresCount:I
     invoke-static {v2, v5}, Landroid/net/wifi/SupplicantStateTracker;->access$002(Landroid/net/wifi/SupplicantStateTracker;I)I
 
-    .line 248
     :cond_0
     :goto_0
     return-void
 
-    .line 241
     :cond_1
     iget-object v2, p0, Landroid/net/wifi/SupplicantStateTracker$DisconnectedState;->this$0:Landroid/net/wifi/SupplicantStateTracker;
 
@@ -125,7 +136,7 @@
 
     if-lt v2, v3, :cond_0
 
-    .line 242
+    .line 235
     const-string v2, "SupplicantStateTracker"
 
     new-instance v3, Ljava/lang/StringBuilder;
@@ -150,6 +161,7 @@
 
     invoke-static {v2, v3}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
 
+    .line 237
     .line 244
     iget-object v2, p0, Landroid/net/wifi/SupplicantStateTracker$DisconnectedState;->this$0:Landroid/net/wifi/SupplicantStateTracker;
 

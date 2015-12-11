@@ -2556,7 +2556,7 @@
 .end method
 
 .method private addFreeWindowToListLocked(Lcom/android/server/wm/WindowState;)V
-    .locals 4
+    .locals 5
     .param p1, "win"    # Lcom/android/server/wm/WindowState;
 
     .prologue
@@ -2588,9 +2588,13 @@
 
     check-cast v3, Lcom/android/server/wm/WindowState;
 
-    iget v3, v3, Lcom/android/server/wm/WindowState;->mBaseLayer:I
+    iget v4, v3, Lcom/android/server/wm/WindowState;->mBaseLayer:I
 
-    if-gt v3, v1, :cond_1
+    if-gt v4, v1, :cond_1
+
+    iget-boolean v4, v3, Lcom/android/server/wm/WindowState;->mIsImWindow:Z
+
+    if-nez v4, :cond_1
 
     .line 1080
     :cond_0
