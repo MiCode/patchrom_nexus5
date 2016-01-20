@@ -21,6 +21,7 @@ local-miui-removed-apps :=
 
 local-miui-modified-apps :=
 
+# All vendor apks needed
 local-phone-apps := Camera2 Bluetooth HTMLViewer KeyChain LatinIME NfcNci PacProcessor \
         UserDictionaryProvider WAPPushManager
 
@@ -29,6 +30,9 @@ local-phone-priv-apps := BackupRestoreConfirmation DefaultContainerService Fused
         Shell Tag VpnDialogs
 
 local-density := XXHDPI
+
+# The certificate for release version
+local-certificate-dir := security
 
 # To include the local targets before and after zip the final ZIP file, 
 # and the local-targets should:
