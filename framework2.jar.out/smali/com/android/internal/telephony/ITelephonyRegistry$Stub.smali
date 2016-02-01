@@ -660,58 +660,97 @@
     .restart local v1    # "_arg0":Landroid/os/Bundle;
     goto :goto_a
 
-    .line 188
     .end local v1    # "_arg0":Landroid/os/Bundle;
     :sswitch_b
     const-string v0, "com.android.internal.telephony.ITelephonyRegistry"
 
     invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
-    .line 190
     invoke-virtual {p2}, Landroid/os/Parcel;->readInt()I
 
     move-result v1
 
-    .line 191
     .local v1, "_arg0":I
     invoke-virtual {p0, v1}, Lcom/android/internal/telephony/ITelephonyRegistry$Stub;->notifyOtaspChanged(I)V
 
-    .line 192
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    .line 193
     const/4 v0, 0x1
 
     goto/16 :goto_0
 
-    .line 197
     .end local v1    # "_arg0":I
     :sswitch_c
     const-string v0, "com.android.internal.telephony.ITelephonyRegistry"
 
     invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
 
-    .line 199
     sget-object v0, Landroid/telephony/CellInfo;->CREATOR:Landroid/os/Parcelable$Creator;
 
     invoke-virtual {p2, v0}, Landroid/os/Parcel;->createTypedArrayList(Landroid/os/Parcelable$Creator;)Ljava/util/ArrayList;
 
     move-result-object v10
 
-    .line 200
     .local v10, "_arg0":Ljava/util/List;, "Ljava/util/List<Landroid/telephony/CellInfo;>;"
     invoke-virtual {p0, v10}, Lcom/android/internal/telephony/ITelephonyRegistry$Stub;->notifyCellInfo(Ljava/util/List;)V
 
-    .line 201
     invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
 
-    .line 202
     const/4 v0, 0x1
 
     goto/16 :goto_0
 
-    .line 38
-    nop
+    :sswitch_fe
+    const-string v0, "com.android.internal.telephony.ITelephonyRegistry"
+
+    invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    invoke-virtual {p2}, Landroid/os/Parcel;->readStrongBinder()Landroid/os/IBinder;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lmiui/telephony/IMiuiTelephony$Stub;->asInterface(Landroid/os/IBinder;)Lmiui/telephony/IMiuiTelephony;
+
+    move-result-object v1
+
+    .local v1, "_arg0":Lmiui/telephony/IMiuiTelephony;
+    invoke-virtual {p0, v1}, Lcom/android/internal/telephony/ITelephonyRegistry$Stub;->setMiuiTelephony(Lmiui/telephony/IMiuiTelephony;)V
+
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    const/4 v0, 0x1
+
+    goto/16 :goto_0
+
+    :sswitch_ff
+    const-string v0, "com.android.internal.telephony.ITelephonyRegistry"
+
+    invoke-virtual {p2, v0}, Landroid/os/Parcel;->enforceInterface(Ljava/lang/String;)V
+
+    invoke-virtual {p0}, Lcom/android/internal/telephony/ITelephonyRegistry$Stub;->getMiuiTelephony()Lmiui/telephony/IMiuiTelephony;
+
+    move-result-object v11
+
+    .local v11, "_result":Lmiui/telephony/IMiuiTelephony;
+    invoke-virtual {p3}, Landroid/os/Parcel;->writeNoException()V
+
+    if-eqz v11, :cond_ff
+
+    invoke-interface {v11}, Lmiui/telephony/IMiuiTelephony;->asBinder()Landroid/os/IBinder;
+
+    move-result-object v0
+
+    :goto_ff
+    invoke-virtual {p3, v0}, Landroid/os/Parcel;->writeStrongBinder(Landroid/os/IBinder;)V
+
+    const/4 v0, 0x1
+
+    goto/16 :goto_0
+
+    :cond_ff
+    const/4 v0, 0x0
+
+    goto :goto_ff
 
     :sswitch_data_0
     .sparse-switch
@@ -727,6 +766,8 @@
         0xa -> :sswitch_a
         0xb -> :sswitch_b
         0xc -> :sswitch_c
+        0xfe -> :sswitch_fe
+        0xff -> :sswitch_ff
         0x5f4e5446 -> :sswitch_0
     .end sparse-switch
 .end method

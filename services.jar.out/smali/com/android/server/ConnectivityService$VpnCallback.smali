@@ -238,6 +238,8 @@
 
     invoke-virtual {v0}, Landroid/os/Message;->sendToTarget()V
 
+    invoke-static {p1}, Lcom/android/server/ConnectivityServiceInjector;->notifyVpnStatusChanged(Landroid/net/NetworkInfo;)V
+
     .line 3796
     return-void
 .end method

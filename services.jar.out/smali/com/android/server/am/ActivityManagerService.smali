@@ -72463,7 +72463,6 @@
     :catchall_0
     move-exception v1
 
-    .line 10424
     monitor-exit p0
     :try_end_0
     .catchall {:try_start_0 .. :try_end_0} :catchall_0
@@ -72507,6 +72506,7 @@
 
     goto :goto_0
 
+    .line 3537
     .end local v0    # "i":I
     :cond_0
     return p4
