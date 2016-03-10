@@ -619,10 +619,10 @@
     .param p0, "context"    # Landroid/content/Context;
 
     .prologue
-    .line 56
     invoke-static {p0}, Lcom/android/internal/telephony/PhoneFactory;->makeDefaultPhone(Landroid/content/Context;)V
 
-    .line 57
+    invoke-static {p0}, Lmiui/telephony/MiuiTelephony;->init(Landroid/content/Context;)V
+
     return-void
 .end method
 
